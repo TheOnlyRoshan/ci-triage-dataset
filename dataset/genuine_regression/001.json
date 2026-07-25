@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_001",
+  "label": "genuine_regression",
+  "log_file": "001.log",
+  "injected_fault": "Flipped division to multiplication in get_total currency conversion (amount / rate -> amount * rate)",
+  "commit_sha": "548483f0dd07596dcd98a25f255ad80d1697e2e8",
+  "ci_provider": "github_actions",
+  "trigger": "pull_request",
+  "failing_tests": [
+    "test_total_converts_foreign_currency",
+    "test_total_mixed_currencies"
+  ],
+  "timestamp": "2026-07-26T01:15:26+05:30"
+}

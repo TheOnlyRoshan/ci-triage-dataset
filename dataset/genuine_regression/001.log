@@ -1,0 +1,42 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 16 items
+
+tests/test_api.py ............FF..                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_total_converts_foreign_currency _____________________
+
+client = <starlette.testclient.TestClient object at 0x7f4101c22990>
+mock_rates = None
+
+    def test_total_converts_foreign_currency(client, mock_rates):
+        # 1000 INR at fake rate 100.0 (1 USD = 100 INR) => 10 USD.
+        _add_expense(client, 1000, "INR")
+        body = client.get("/expenses/total?base_currency=USD").json()
+>       assert body["total"] == 10.0
+E       assert 100000.0 == 10.0
+
+tests/test_api.py:115: AssertionError
+_________________________ test_total_mixed_currencies __________________________
+
+client = <starlette.testclient.TestClient object at 0x7f4101c22490>
+mock_rates = None
+
+    def test_total_mixed_currencies(client, mock_rates):
+        # 100 USD (as-is) + 1000 INR (=>10) + 100 SEK (rate 10 => 10) = 120 USD.
+        _add_expense(client, 100, "USD")
+        _add_expense(client, 1000, "INR")
+        _add_expense(client, 100, "SEK")
+        body = client.get("/expenses/total?base_currency=USD").json()
+>       assert body["total"] == 120.0
+E       assert 101100.0 == 120.0
+
+tests/test_api.py:124: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_total_converts_foreign_currency - assert 100000.0 == 10.0
+FAILED tests/test_api.py::test_total_mixed_currencies - assert 101100.0 == 120.0
+========================= 2 failed, 14 passed in 0.19s =========================
+Error: Process completed with exit code 1.
