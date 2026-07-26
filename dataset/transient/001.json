@@ -1,0 +1,13 @@
+{
+  "id": "transient_001",
+  "label": "transient",
+  "log_file": "001.log",
+  "injected_fault": "Simulated httpx.ConnectError on the exchange-rate call via a failing mocked client; the app correctly returns 503, and the test asserts 200 so it fails. Surface signal in the log is '503 == 200'; the underlying cause is a network ConnectError.",
+  "commit_sha": "6337194ec3b307e15e872a452c49d81018dbe91c",
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_total_transient_network_failure"
+  ],
+  "timestamp": "2026-07-26T12:12:02+05:30"
+}

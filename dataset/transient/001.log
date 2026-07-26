@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+
+tests/test_api.py ................F                                      [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_total_transient_network_failure _____________________
+
+client = <starlette.testclient.TestClient object at 0x7ff18224c550>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7ff18224fc90>
+
+    def test_total_transient_network_failure(client, monkeypatch):
+        """Simulates the exchange-rate API being unreachable (transient failure)."""
+        import httpx
+        import main
+
+        class FailingAsyncClient:
+            async def __aenter__(self): return self
+            async def __aexit__(self, *a): return None
+            async def get(self, *a, **k):
+                raise httpx.ConnectError("Connection failed")
+
+        monkeypatch.setattr(main.httpx, "AsyncClient", FailingAsyncClient)
+
+        _add_expense(client, 100, "INR")
+        response = client.get("/expenses/total?base_currency=USD")
+        # Your app catches RequestError and returns 503; this test asserts success (200),
+        # so it FAILS when the network is down — producing a transient-labeled failure.
+>       assert response.status_code == 200
+E       assert 503 == 200
+E        +  where 503 = <Response [503 Service Unavailable]>.status_code
+
+tests/test_api.py:163: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_total_transient_network_failure - assert 503 == 200
+ +  where 503 = <Response [503 Service Unavailable]>.status_code
+========================= 1 failed, 16 passed in 0.19s =========================
+Error: Process completed with exit code 1.
