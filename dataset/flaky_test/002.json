@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_002",
+  "label": "flaky_test",
+  "log_file": "002.log",
+  "injected_fault": "Non-deterministic assertion (random jitter) \u2014 fails intermittently with no code change",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_injected_flaky_rounding"
+  ],
+  "timestamp": "2026-07-26T18:59:05.913327+00:00"
+}

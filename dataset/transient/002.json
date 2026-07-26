@@ -1,0 +1,14 @@
+{
+  "id": "transient_002",
+  "label": "transient",
+  "log_file": "002.log",
+  "injected_fault": "Simulate a network ConnectError on the exchange-rate call; app returns 503, test asserts 200",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_injected_transient_network_failure"
+  ],
+  "timestamp": "2026-07-26T18:59:05.263866+00:00"
+}

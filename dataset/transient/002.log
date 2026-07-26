@@ -1,0 +1,53 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.3.3, pluggy-1.6.0 -- /Users/roshanpandey/Python Projects/expense-tracker-api/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/roshanpandey/Python Projects/expense-tracker-api
+plugins: anyio-4.12.1
+collecting ... collected 17 items
+
+tests/test_api.py::test_root_health_check PASSED                         [  5%]
+tests/test_api.py::test_create_expense_succeeds PASSED                   [ 11%]
+tests/test_api.py::test_create_expense_normalizes_currency_to_uppercase PASSED [ 17%]
+tests/test_api.py::test_create_expense_rejects_zero_amount PASSED        [ 23%]
+tests/test_api.py::test_create_expense_rejects_negative_amount PASSED    [ 29%]
+tests/test_api.py::test_create_expense_rejects_invalid_date PASSED       [ 35%]
+tests/test_api.py::test_list_expenses_empty PASSED                       [ 41%]
+tests/test_api.py::test_list_expenses_returns_added PASSED               [ 47%]
+tests/test_api.py::test_delete_existing_expense PASSED                   [ 52%]
+tests/test_api.py::test_delete_nonexistent_expense_returns_404 PASSED    [ 58%]
+tests/test_api.py::test_total_empty_db_is_zero PASSED                    [ 64%]
+tests/test_api.py::test_total_base_currency_added_as_is PASSED           [ 70%]
+tests/test_api.py::test_total_converts_foreign_currency PASSED           [ 76%]
+tests/test_api.py::test_total_mixed_currencies PASSED                    [ 82%]
+tests/test_api.py::test_total_skips_unknown_currency PASSED              [ 88%]
+tests/test_api.py::test_total_base_currency_case_insensitive PASSED      [ 94%]
+tests/test_api.py::test_injected_transient_network_failure FAILED        [100%]
+
+=================================== FAILURES ===================================
+___________________ test_injected_transient_network_failure ____________________
+
+client = <starlette.testclient.TestClient object at 0x109313190>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x109283490>
+
+    def test_injected_transient_network_failure(client, monkeypatch):
+        """Injected: simulates the exchange-rate API being unreachable."""
+        import httpx
+        import main
+    
+        class FailingAsyncClient:
+            async def __aenter__(self): return self
+            async def __aexit__(self, *a): return None
+            async def get(self, *a, **k):
+                raise httpx.ConnectError("Connection failed")
+    
+        monkeypatch.setattr(main.httpx, "AsyncClient", FailingAsyncClient)
+        _add_expense(client, 100, "INR")
+        response = client.get("/expenses/total?base_currency=USD")
+>       assert response.status_code == 200
+E       assert 503 == 200
+E        +  where 503 = <Response [503 Service Unavailable]>.status_code
+
+tests/test_api.py:160: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_injected_transient_network_failure - assert 50...
+========================= 1 failed, 16 passed in 0.13s =========================
