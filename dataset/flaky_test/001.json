@@ -1,0 +1,13 @@
+{
+  "id": "flaky_test_001",
+  "label": "flaky_test",
+  "log_file": "001.log",
+  "injected_fault": "Added a test with a non-deterministic assertion (random.choice jitter) so it fails ~50% of runs with no code change. NOTE: this single log is surface-identical to a genuine_regression assertion failure; the flaky nature is only visible across multiple runs (fails then passes on the same commit).",
+  "commit_sha": "6fd04073f695503e13688dcc65169556de96d2d8",
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_flaky_currency_rounding"
+  ],
+  "timestamp": "2026-07-26T12:34:34+05:30"
+}
