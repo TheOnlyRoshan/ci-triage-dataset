@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_003",
+  "label": "flaky_test",
+  "log_file": "003.log",
+  "injected_fault": "Random failure via probability threshold (~50% fail)",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_injected_flaky_probability"
+  ],
+  "timestamp": "2026-07-26T19:42:32.204220+00:00"
+}

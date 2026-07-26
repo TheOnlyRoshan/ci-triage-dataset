@@ -1,0 +1,14 @@
+{
+  "id": "transient_004",
+  "label": "transient",
+  "log_file": "004.log",
+  "injected_fault": "Exchange-rate API raises ReadTimeout (slow upstream)",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_injected_transient_read_timeout"
+  ],
+  "timestamp": "2026-07-26T19:42:29.095591+00:00"
+}

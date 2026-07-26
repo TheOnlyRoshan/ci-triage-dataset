@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_010",
+  "label": "genuine_regression",
+  "log_file": "010.log",
+  "injected_fault": "Amount validation gt=0 changed to ge=0, allowing zero amounts",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_create_expense_rejects_zero_amount"
+  ],
+  "timestamp": "2026-07-26T19:42:26.608645+00:00"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_008",
+  "label": "genuine_regression",
+  "log_file": "008.log",
+  "injected_fault": "base_currency no longer uppercased, breaking case-insensitive matching",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_total_base_currency_case_insensitive"
+  ],
+  "timestamp": "2026-07-26T19:42:25.323065+00:00"
+}

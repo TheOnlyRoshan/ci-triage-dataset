@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.9, pytest-8.3.3, pluggy-1.6.0 -- /Users/roshanpandey/Python Projects/expense-tracker-api/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/roshanpandey/Python Projects/expense-tracker-api
+plugins: anyio-4.14.2
+collecting ... collected 16 items
+
+tests/test_api.py::test_root_health_check PASSED                         [  6%]
+tests/test_api.py::test_create_expense_succeeds PASSED                   [ 12%]
+tests/test_api.py::test_create_expense_normalizes_currency_to_uppercase PASSED [ 18%]
+tests/test_api.py::test_create_expense_rejects_zero_amount PASSED        [ 25%]
+tests/test_api.py::test_create_expense_rejects_negative_amount PASSED    [ 31%]
+tests/test_api.py::test_create_expense_rejects_invalid_date PASSED       [ 37%]
+tests/test_api.py::test_list_expenses_empty PASSED                       [ 43%]
+tests/test_api.py::test_list_expenses_returns_added FAILED               [ 50%]
+tests/test_api.py::test_delete_existing_expense PASSED                   [ 56%]
+tests/test_api.py::test_delete_nonexistent_expense_returns_404 PASSED    [ 62%]
+tests/test_api.py::test_total_empty_db_is_zero PASSED                    [ 68%]
+tests/test_api.py::test_total_base_currency_added_as_is PASSED           [ 75%]
+tests/test_api.py::test_total_converts_foreign_currency PASSED           [ 81%]
+tests/test_api.py::test_total_mixed_currencies PASSED                    [ 87%]
+tests/test_api.py::test_total_skips_unknown_currency PASSED              [ 93%]
+tests/test_api.py::test_total_base_currency_case_insensitive PASSED      [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_list_expenses_returns_added _______________________
+
+client = <starlette.testclient.TestClient object at 0x109d7d990>
+
+    def test_list_expenses_returns_added(client):
+        _add_expense(client, 10, "USD")
+        _add_expense(client, 20, "EUR")
+        rows = client.get("/expenses").json()
+        assert len(rows) == 2
+>       assert rows[0]["amount"] == 10
+E       assert 20.0 == 10
+
+tests/test_api.py:74: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_list_expenses_returns_added - assert 20.0 == 10
+========================= 1 failed, 15 passed in 0.09s =========================

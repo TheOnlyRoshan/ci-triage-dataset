@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_005",
+  "label": "flaky_test",
+  "log_file": "005.log",
+  "injected_fault": "Fails on even-numbered seconds (time-dependent, ~50%)",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_injected_flaky_time_parity"
+  ],
+  "timestamp": "2026-07-26T19:53:39.089361+00:00"
+}

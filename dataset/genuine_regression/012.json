@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_012",
+  "label": "genuine_regression",
+  "log_file": "012.log",
+  "injected_fault": "List endpoint drops ORDER BY, breaking ordered-result expectations",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_list_expenses_returns_added"
+  ],
+  "timestamp": "2026-07-26T19:42:27.835672+00:00"
+}

@@ -12,10 +12,12 @@ Local runs have no commit, so commit_sha is null and source is "local_injection"
 See faults_catalog.py for the list of faults.
 """
 
+import argparse
 import json
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional, Tuple
 
 from faults_catalog import FAULTS
 
@@ -32,7 +34,7 @@ APP_PYTHON = APP_REPO / "venv" / "bin" / "python"   # Windows: venv/Scripts/pyth
 DATASET_DIR = DATASET_REPO / "dataset"
 
 
-def run_pytest() -> tuple[bool, str]:
+def run_pytest() -> Tuple[bool, str]:
     """Run the app's test suite (via the app venv), return (passed, output)."""
     result = subprocess.run(
         [str(APP_PYTHON), "-m", "pytest", "-v"],
@@ -132,17 +134,28 @@ def write_example(category: str, index: int, fault: dict, output: str) -> None:
           f"({len(metadata['failing_tests'])} failing test(s))")
 
 
-def main() -> None:
+def main(only_category: Optional[str] = None) -> None:
     if not app_repo_is_clean():
         print("ERROR: app repo has uncommitted changes. Commit or stash them first,")
         print("       so the fault-revert (git checkout .) won't destroy your work.")
         return
 
-    print(f"Generating examples from {len(FAULTS)} fault(s)...\n")
+    # Optionally filter the catalog to a single category (e.g. re-running only
+    # flaky faults that skipped, without regenerating deterministic duplicates).
+    faults = FAULTS
+    if only_category is not None:
+        faults = [f for f in FAULTS if f["label"] == only_category]
+        if not faults:
+            print(f"No faults found for category '{only_category}'.")
+            print(f"Valid categories: {sorted({f['label'] for f in FAULTS})}")
+            return
+        print(f"Filtering to category: {only_category}")
+
+    print(f"Generating examples from {len(faults)} fault(s)...\n")
     generated = 0
     skipped = 0
 
-    for fault in FAULTS:
+    for fault in faults:
         category = fault["label"]
         print(f"[{category}] {fault['description']}")
         try:
@@ -163,4 +176,16 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(
+        description="Generate labeled CI-failure examples by injecting faults."
+    )
+    parser.add_argument(
+        "--only",
+        dest="only_category",
+        default=None,
+        help="Run only faults of this category "
+             "(genuine_regression | transient | flaky_test). "
+             "Useful for re-running flaky faults without duplicating deterministic ones.",
+    )
+    args = parser.parse_args()
+    main(only_category=args.only_category)

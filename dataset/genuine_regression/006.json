@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_006",
+  "label": "genuine_regression",
+  "log_file": "006.log",
+  "injected_fault": "expenses_count no longer subtracts skipped currencies (off-by count)",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_total_skips_unknown_currency"
+  ],
+  "timestamp": "2026-07-26T19:42:24.093892+00:00"
+}

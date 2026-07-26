@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_004",
+  "label": "flaky_test",
+  "log_file": "004.log",
+  "injected_fault": "Random choice among wrong expected values (~66% fail)",
+  "commit_sha": null,
+  "source": "local_injection",
+  "ci_provider": null,
+  "trigger": "local_pytest",
+  "failing_tests": [
+    "tests/test_api.py::test_injected_flaky_random_expected"
+  ],
+  "timestamp": "2026-07-26T19:42:33.437454+00:00"
+}
