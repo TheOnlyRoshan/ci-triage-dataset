@@ -1,0 +1,27 @@
+Run pytest
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+tests/test_api.py ................F                                      [100%]
+=================================== FAILURES ===================================
+_________________________ test_flaky_currency_rounding _________________________
+client = <starlette.testclient.TestClient object at 0x7f3b15e41b90>
+mock_rates = None
+    def test_flaky_currency_rounding(client, mock_rates):
+        """
+        Intentionally flaky: depends on a random value rather than a
+        deterministic condition, so it fails intermittently across runs.
+        """
+        _add_expense(client, 100, "USD")
+        body = client.get("/expenses/total?base_currency=USD").json()
+        # Non-deterministic assertion — sometimes passes, sometimes fails.
+        jitter = random.choice([0, 0.5])
+>       assert body["total"] == 100.0 + jitter
+E       assert 100.0 == (100.0 + 0.5)
+tests/test_api.py:157: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_flaky_currency_rounding - assert 100.0 == (100.0 + 0.5)
+========================= 1 failed, 16 passed in 0.18s =========================
+Error: Process completed with exit code 1.
