@@ -1,0 +1,14 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run python -m pip install --upgrade pip
+  python -m pip install --upgrade pip
+  if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+  shell: /usr/bin/bash -e {0}
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f21b8c3a410>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/pip/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f21b8c3a6d0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/pip/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f21b8c3a990>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/pip/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f21b8c3ac50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/pip/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f21b8c3af10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/pip/
+ERROR: Could not find a version that satisfies the requirement pip (from versions: none)
+ERROR: No matching distribution found for pip
+WARNING: There was an error checking the latest version of pip.
+Error: Process completed with exit code 1.

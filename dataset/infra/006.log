@@ -1,0 +1,2 @@
+Invalid workflow file: .github/workflows/ci.yml#L18
+The workflow is not valid. .github/workflows/ci.yml (Line: 18, Col: 9): Unexpected value 'run'

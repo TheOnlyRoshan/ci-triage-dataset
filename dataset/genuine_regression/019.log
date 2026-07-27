@@ -1,0 +1,56 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run pytest
+  pytest
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+============================= test session starts ==============================
+platform linux -- Python 3.11.13, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 16 items
+
+tests/test_api.py .............FF.                                       [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_total_mixed_currencies __________________________
+
+client = <starlette.testclient.TestClient object at 0x7fe0f3a3bfb0>
+mock_rates = None
+
+    def test_total_mixed_currencies(client, mock_rates):
+        # 100 USD (as-is) + 1000 INR (=>10) + 100 SEK (rate 10 => 10) = 120 USD.
+        _add_expense(client, 100, "USD")
+        _add_expense(client, 1000, "INR")
+        _add_expense(client, 100, "SEK")
+        body = client.get("/expenses/total?base_currency=USD").json()
+>       assert body["total"] == 120.0
+E       assert 100.0 == 120.0
+
+tests/test_api.py:124: AssertionError
+______________________ test_total_skips_unknown_currency _______________________
+
+client = <starlette.testclient.TestClient object at 0x7fe0f3a2b560>
+mock_rates = None
+
+    def test_total_skips_unknown_currency(client, mock_rates):
+        # XYZ isn't in the fake rates -> skipped and reported, not crashed.
+        _add_expense(client, 100, "USD")
+        _add_expense(client, 50, "XYZ")
+        body = client.get("/expenses/total?base_currency=USD").json()
+        assert body["total"] == 100.0
+        assert body["expenses_count"] == 1  # only the USD one counted
+        skipped = body["skipped currency and amount"]
+>       assert len(skipped) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests/test_api.py:136: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_total_mixed_currencies - assert 100.0 == 120.0
+FAILED tests/test_api.py::test_total_skips_unknown_currency - assert 0 == 1
+========================= 2 failed, 14 passed in 0.25s =========================
+Error: Process completed with exit code 1.

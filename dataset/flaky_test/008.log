@@ -1,0 +1,40 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run pytest
+  pytest
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+============================= test session starts ==============================
+platform linux -- Python 3.11.13, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+
+tests/test_api.py ................                                       [ 94%]
+tests/test_float_precision.py F                                          [100%]
+
+=================================== FAILURES ===================================
+____________________ test_accumulated_total_exact_equality _____________________
+
+client = <starlette.testclient.TestClient object at 0x7f0b790d8110>
+mock_rates = None
+
+    def test_accumulated_total_exact_equality(client, mock_rates):
+        # EUR rate is 0.5 in the fixture; repeated division accumulates binary
+        # floating-point error, so exact equality is not reliable.
+        for _ in range(3):
+            client.post("/expenses", json={
+                "amount": 0.1, "currency": "EUR", "category": "t", "date": "2026-07-25"})
+        body = client.get("/expenses/total?base_currency=USD").json()
+>       assert body["total"] == 0.6, f"expected 0.6, got {body['total']!r}"
+E       AssertionError: expected 0.6, got 0.6000000000000001
+E       assert 0.6000000000000001 == 0.6
+
+tests/test_float_precision.py:9: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_float_precision.py::test_accumulated_total_exact_equality
+========================= 1 failed, 16 passed in 0.23s =========================
+Error: Process completed with exit code 1.

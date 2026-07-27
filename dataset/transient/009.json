@@ -1,0 +1,12 @@
+{
+  "id": "transient_009",
+  "label": "transient",
+  "log_file": "009.log",
+  "injected_fault": "actions/checkout hit an intermittent HTTP 500 from the Git server and exhausted its retries",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [],
+  "log_source": "synthetic",
+  "timestamp": "2026-07-28T09:34:00+05:30"
+}

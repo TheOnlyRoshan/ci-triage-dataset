@@ -1,0 +1,12 @@
+{
+  "id": "infra_008",
+  "label": "infra",
+  "log_file": "008.log",
+  "injected_fault": "Referenced a workflow secret that is not configured in the repository",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [],
+  "log_source": "synthetic",
+  "timestamp": "2026-07-28T12:24:00+05:30"
+}

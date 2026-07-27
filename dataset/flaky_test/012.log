@@ -1,0 +1,47 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run pytest
+  pytest
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+============================= test session starts ==============================
+platform linux -- Python 3.11.13, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+
+tests/test_api.py ................                                       [ 94%]
+tests/test_iteration_order.py F                                          [100%]
+
+=================================== FAILURES ===================================
+__________________ test_skipped_currencies_in_insertion_order __________________
+
+client = <starlette.testclient.TestClient object at 0x7fde6bc33da0>
+mock_rates = None
+
+    def test_skipped_currencies_in_insertion_order(client, mock_rates):
+        for cur in ("XYZ", "ABC", "QQQ"):
+            client.post("/expenses", json={
+                "amount": 5, "currency": cur, "category": "t", "date": "2026-07-25"})
+        body = client.get("/expenses/total?base_currency=USD").json()
+        skipped = {row["currency"] for row in body["skipped currency and amount"]}
+        # Comparing a set against an ordered list is order-sensitive by accident.
+>       assert list(skipped) == ["XYZ", "ABC", "QQQ"], f"got {list(skipped)}"
+E       AssertionError: got ['XYZ', 'QQQ', 'ABC']
+E       assert ['XYZ', 'QQQ', 'ABC'] == ['XYZ', 'ABC', 'QQQ']
+E         
+E         At index 1 diff: 'QQQ' != 'ABC'
+E         Use -v to get more diff
+
+tests/test_iteration_order.py:9: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Warning: unknown currency XYZ, skipping amount 5.0
+Warning: unknown currency ABC, skipping amount 5.0
+Warning: unknown currency QQQ, skipping amount 5.0
+=========================== short test summary info ============================
+FAILED tests/test_iteration_order.py::test_skipped_currencies_in_insertion_order
+========================= 1 failed, 16 passed in 0.28s =========================
+Error: Process completed with exit code 1.

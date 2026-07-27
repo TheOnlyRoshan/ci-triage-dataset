@@ -1,0 +1,28 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run actions/checkout@v4
+  with:
+    repository: TheOnlyRoshan/expense-tracker-api
+    ref: refs/heads/main
+    fetch-depth: 1
+    clean: true
+Syncing repository: TheOnlyRoshan/expense-tracker-api
+Getting Git version info
+Temporarily overriding HOME='/home/runner/work/_temp/9f2c1a44' before making global git config changes
+Initializing the repository
+Disabling automatic garbage collection
+Setting up auth
+Fetching the repository
+  /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +refs/heads/main*:refs/remotes/origin/main*
+error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500
+fatal: expected flush after ref listing
+The process '/usr/bin/git' failed with exit code 128
+Waiting 12 seconds before trying again
+  /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +refs/heads/main*:refs/remotes/origin/main*
+error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500
+fatal: expected flush after ref listing
+The process '/usr/bin/git' failed with exit code 128
+Waiting 19 seconds before trying again
+  /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +refs/heads/main*:refs/remotes/origin/main*
+error: RPC failed; HTTP 500 curl 22 The requested URL returned error: 500
+fatal: expected flush after ref listing
+Error: The process '/usr/bin/git' failed with exit code 128

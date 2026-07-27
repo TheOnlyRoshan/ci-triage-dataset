@@ -4,11 +4,12 @@
   "log_file": "009.log",
   "injected_fault": "Currency not uppercased on insert, breaking normalization",
   "commit_sha": null,
-  "source": "local_injection",
   "ci_provider": null,
   "trigger": "local_pytest",
   "failing_tests": [
     "tests/test_api.py::test_create_expense_normalizes_currency_to_uppercase"
   ],
-  "timestamp": "2026-07-26T19:42:25.939772+00:00"
+  "log_source": "captured",
+  "timestamp": "2026-07-26T19:42:25.939772+00:00",
+  "source": "local_injection"
 }

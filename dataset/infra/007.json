@@ -1,0 +1,12 @@
+{
+  "id": "infra_007",
+  "label": "infra",
+  "log_file": "007.log",
+  "injected_fault": "Set runs-on to a non-existent runner label ubuntu-99.04",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [],
+  "log_source": "synthetic",
+  "timestamp": "2026-07-28T12:07:00+05:30"
+}

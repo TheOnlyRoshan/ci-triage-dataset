@@ -1,0 +1,12 @@
+{
+  "id": "infra_005",
+  "label": "infra",
+  "log_file": "005.log",
+  "injected_fault": "Added psycopg2==2.9.9 to requirements.txt; source build fails without libpq-dev on runner",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [],
+  "log_source": "synthetic",
+  "timestamp": "2026-07-28T11:51:33+05:30"
+}

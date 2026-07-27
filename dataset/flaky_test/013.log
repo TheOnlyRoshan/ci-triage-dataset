@@ -1,0 +1,38 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run pytest
+  pytest
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+============================= test session starts ==============================
+platform linux -- Python 3.11.13, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+
+tests/test_api.py ................                                       [ 94%]
+tests/test_connection_leak.py F                                          [100%]
+
+=================================== FAILURES ===================================
+__________________ test_row_count_after_unclosed_connections ___________________
+
+client = <starlette.testclient.TestClient object at 0x7fc5a16d6240>
+tmp_path = PosixPath('/tmp/pytest-of-runner/pytest-22/test_row_count_after_unclosed_0')
+
+    def test_row_count_after_unclosed_connections(client, tmp_path):
+        db = tmp_path / "leaky.db"
+        conns = []
+        for i in range(5):
+            c = sqlite3.connect(str(db))
+            c.execute("CREATE TABLE IF NOT EXISTS t (n INTEGER)")
+>           c.execute("INSERT INTO t (n) VALUES (?)", (i,))
+E           sqlite3.OperationalError: database is locked
+
+tests/test_connection_leak.py:12: OperationalError
+=========================== short test summary info ============================
+FAILED tests/test_connection_leak.py::test_row_count_after_unclosed_connections
+========================= 1 failed, 16 passed in 5.29s =========================
+Error: Process completed with exit code 1.

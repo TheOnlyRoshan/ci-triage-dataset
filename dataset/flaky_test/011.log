@@ -1,0 +1,43 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run pytest
+  pytest
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+============================= test session starts ==============================
+platform linux -- Python 3.11.13, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+
+tests/test_api.py ................                                       [ 94%]
+tests/test_date_assumption.py F                                          [100%]
+
+=================================== FAILURES ===================================
+________________________ test_stored_date_matches_today ________________________
+
+client = <starlette.testclient.TestClient object at 0x7f2586127b00>
+
+    def test_stored_date_matches_today(client):
+        client.post("/expenses", json={
+            "amount": 10, "currency": "USD", "category": "t", "date": "2026-07-25"})
+        rows = client.get("/expenses").json()
+        # Hardcoded against the day the test was written.
+>       assert rows[0]["date"] == date.today().isoformat(), (
+            f"stored {rows[0]['date']!r}, today is {date.today().isoformat()!r}")
+E       AssertionError: stored '2026-07-25', today is '2026-07-27'
+E       assert '2026-07-25' == '2026-07-27'
+E         
+E         - 2026-07-27
+E         ?          ^
+E         + 2026-07-25
+E         ?          ^
+
+tests/test_date_assumption.py:10: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_date_assumption.py::test_stored_date_matches_today - Assert...
+========================= 1 failed, 16 passed in 0.25s =========================
+Error: Process completed with exit code 1.

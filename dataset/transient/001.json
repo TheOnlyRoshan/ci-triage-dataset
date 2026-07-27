@@ -9,5 +9,6 @@
   "failing_tests": [
     "test_total_transient_network_failure"
   ],
+  "log_source": "captured",
   "timestamp": "2026-07-26T12:12:02+05:30"
 }

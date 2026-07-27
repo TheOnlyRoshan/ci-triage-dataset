@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_013",
+  "label": "flaky_test",
+  "log_file": "013.log",
+  "injected_fault": "Resource leak: unclosed sqlite connection makes a later assertion depend on GC timing",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_row_count_after_unclosed_connections"
+  ],
+  "log_source": "captured",
+  "timestamp": "2026-07-28T11:16:00+05:30"
+}

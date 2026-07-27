@@ -9,5 +9,6 @@
   "failing_tests": [
     "test_flaky_currency_rounding"
   ],
+  "log_source": "captured",
   "timestamp": "2026-07-26T12:34:34+05:30"
 }

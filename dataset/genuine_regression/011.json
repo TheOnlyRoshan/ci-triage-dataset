@@ -4,11 +4,12 @@
   "log_file": "011.log",
   "injected_fault": "Delete endpoint no longer returns 404 for missing id (guard removed)",
   "commit_sha": null,
-  "source": "local_injection",
   "ci_provider": null,
   "trigger": "local_pytest",
   "failing_tests": [
     "tests/test_api.py::test_delete_nonexistent_expense_returns_404"
   ],
-  "timestamp": "2026-07-26T19:42:27.226192+00:00"
+  "log_source": "captured",
+  "timestamp": "2026-07-26T19:42:27.226192+00:00",
+  "source": "local_injection"
 }

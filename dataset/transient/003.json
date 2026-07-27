@@ -4,11 +4,12 @@
   "log_file": "003.log",
   "injected_fault": "Exchange-rate API raises ConnectError (host unreachable)",
   "commit_sha": null,
-  "source": "local_injection",
   "ci_provider": null,
   "trigger": "local_pytest",
   "failing_tests": [
     "tests/test_api.py::test_injected_transient_connect_error"
   ],
-  "timestamp": "2026-07-26T19:42:28.463676+00:00"
+  "log_source": "captured",
+  "timestamp": "2026-07-26T19:42:28.463676+00:00",
+  "source": "local_injection"
 }

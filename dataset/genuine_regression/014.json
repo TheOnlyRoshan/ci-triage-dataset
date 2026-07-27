@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_014",
+  "label": "genuine_regression",
+  "log_file": "014.log",
+  "injected_fault": "create_expense success message text changed, breaking response contract",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_create_expense_succeeds"
+  ],
+  "log_source": "captured",
+  "timestamp": "2026-07-28T09:34:00+05:30"
+}

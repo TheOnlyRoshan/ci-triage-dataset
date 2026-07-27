@@ -10,5 +10,6 @@
     "test_total_converts_foreign_currency",
     "test_total_mixed_currencies"
   ],
+  "log_source": "captured",
   "timestamp": "2026-07-26T01:15:26+05:30"
 }

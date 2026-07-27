@@ -1,0 +1,15 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run actions/checkout@v4
+Syncing repository: TheOnlyRoshan/expense-tracker-api
+/usr/bin/docker pull postgres:16-alpine
+16-alpine: Pulling from library/postgres
+Error response from daemon: toomanyrequests: You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limit
+Warning: Docker pull failed with exit code 1, back off 3.271 seconds before retry.
+/usr/bin/docker pull postgres:16-alpine
+16-alpine: Pulling from library/postgres
+Error response from daemon: toomanyrequests: You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limit
+Warning: Docker pull failed with exit code 1, back off 7.94 seconds before retry.
+/usr/bin/docker pull postgres:16-alpine
+16-alpine: Pulling from library/postgres
+Error response from daemon: toomanyrequests: You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limit
+Error: Docker pull failed with exit code 1

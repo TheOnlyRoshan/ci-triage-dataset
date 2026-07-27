@@ -7,5 +7,6 @@
   "ci_provider": "github_actions",
   "trigger": "push",
   "failing_tests": [],
+  "log_source": "captured",
   "timestamp": "2026-07-26T10:24:21+05:30"
 }

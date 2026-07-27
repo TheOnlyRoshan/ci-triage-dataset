@@ -1,0 +1,14 @@
+{
+  "id": "genuine_regression_015",
+  "label": "genuine_regression",
+  "log_file": "015.log",
+  "injected_fault": "delete_expense matches on amount column instead of id, so no row is deleted",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_delete_existing_expense"
+  ],
+  "log_source": "captured",
+  "timestamp": "2026-07-28T09:51:00+05:30"
+}

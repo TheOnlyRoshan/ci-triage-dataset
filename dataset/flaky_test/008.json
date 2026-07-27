@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_008",
+  "label": "flaky_test",
+  "log_file": "008.log",
+  "injected_fault": "Floating-point equality without tolerance on accumulated conversion total",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_accumulated_total_exact_equality"
+  ],
+  "log_source": "captured",
+  "timestamp": "2026-07-28T09:51:00+05:30"
+}

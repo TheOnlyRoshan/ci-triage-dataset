@@ -1,0 +1,14 @@
+{
+  "id": "flaky_test_006",
+  "label": "flaky_test",
+  "log_file": "006.log",
+  "injected_fault": "Order-dependent test: module-level counter shared across tests, fails when suite order shifts",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [
+    "test_expects_clean_state"
+  ],
+  "log_source": "captured",
+  "timestamp": "2026-07-28T09:17:00+05:30"
+}

@@ -1,0 +1,39 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run pytest
+  pytest
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+============================= test session starts ==============================
+platform linux -- Python 3.11.13, pytest-8.3.3, pluggy-1.6.0
+rootdir: /home/runner/work/expense-tracker-api/expense-tracker-api
+plugins: anyio-4.14.2
+collected 17 items
+
+tests/test_api.py ................                                       [ 94%]
+tests/test_workspace_clean.py F                                          [100%]
+
+=================================== FAILURES ===================================
+___________________ test_workspace_has_no_leftover_artifacts ___________________
+
+client = <starlette.testclient.TestClient object at 0x7f315fb23b90>
+
+    def test_workspace_has_no_leftover_artifacts(client):
+        # Assumes a clean checkout. On a reused self-hosted runner the previous
+        # job's artifacts may still be present.
+        leftovers = [f for f in os.listdir(".") if f.startswith(".ci_")]
+>       assert leftovers == [], f"stale artifacts in workspace: {leftovers}"
+E       AssertionError: stale artifacts in workspace: ['.ci_marker']
+E       assert ['.ci_marker'] == []
+E         
+E         Left contains one more item: '.ci_marker'
+E         Use -v to get more diff
+
+tests/test_workspace_clean.py:9: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_workspace_clean.py::test_workspace_has_no_leftover_artifacts
+========================= 1 failed, 16 passed in 0.26s =========================
+Error: Process completed with exit code 1.

@@ -1,0 +1,12 @@
+{
+  "id": "transient_011",
+  "label": "transient",
+  "log_file": "011.log",
+  "injected_fault": "Temporary DNS resolution failure (SERVFAIL) for pypi.org during dependency install",
+  "commit_sha": null,
+  "ci_provider": "github_actions",
+  "trigger": "push",
+  "failing_tests": [],
+  "log_source": "synthetic",
+  "timestamp": "2026-07-28T10:08:00+05:30"
+}

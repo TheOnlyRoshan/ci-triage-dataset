@@ -1,0 +1,21 @@
+Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Run sudo apt-get update && sudo apt-get install -y libpq-dev
+  sudo apt-get update && sudo apt-get install -y libpq-dev
+  shell: /usr/bin/bash -e {0}
+Hit:1 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1042 kB]
+Err:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
+  Hash Sum mismatch
+  Hashes of expected file:
+   - Filesize:1042118 [weak]
+   - SHA256:9c1f0a8e6b3f4d2ac7b1e05d3a9f77c4b2ee81d6a0f5c39b7e4a12d8c6b03fe1
+  Hashes of received file:
+   - SHA256:41b7e2c9d0a5f38b6c1d94e7a2f05b83cd6e91470af2b5d8c3e07a19f4b62d5c
+  Last modification reported: Tue, 28 Jul 2026 04:11:32 +0000
+  Release file created at: Tue, 28 Jul 2026 04:09:58 +0000
+Reading package lists...
+E: Failed to fetch http://azure.archive.ubuntu.com/ubuntu/dists/noble-updates/main/binary-amd64/Packages.gz  Hash Sum mismatch
+E: Some index files failed to download. They have been ignored, or old ones used instead.
+Error: Process completed with exit code 1.
